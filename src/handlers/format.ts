@@ -23,7 +23,7 @@ class HandleFormat implements Handler {
       .join('\n');
 
     return await create(
-      include + (exclude.length > 0) ? `\n${exclude}` : ''
+      include + (exclude.length > 0 ? `\n${exclude}` : '')
     ).then((g: Globber) => g.globGenerator());
   }
 
