@@ -8,7 +8,6 @@ const constants_1 = require("../constants");
 const inputs = require("../inputs");
 const git_commands_1 = require("../git-commands");
 const helpers_1 = require("../helpers");
-const github_1 = require("@actions/github");
 /*
  * Deals with /format command
  * */
@@ -38,8 +37,7 @@ class HandleFormat {
         }
     }
     async handle(command) {
-        if (!helpers_1.isCommenterCollaborator(github_1.context.payload.comment)) {
-            console.log(`This command can only be executed by collaborators on this project. The current user is a `);
+        if (!helpers_1.isCommenterCollaborator()) {
             return;
         }
         console.log(`Starting command: ${command}`);

@@ -6,8 +6,7 @@ import {Handler, Handlers} from './handlers';
 import {clangExtensions, pythonExtensions} from '../constants';
 import * as inputs from '../inputs';
 import {haveFilesChanged, commit, push} from '../git-commands';
-import {getCommentAuthorAssoc, isCommenterCollaborator} from '../helpers';
-import {context} from '@actions/github';
+import {isCommenterCollaborator} from '../helpers';
 
 /*
  * Deals with /format command
