@@ -38,7 +38,7 @@ class HandleFormat {
         }
     }
     async handle(command) {
-        if (!helpers_1.isCommenterCollaborator()) {
+        if (!helpers_1.isCommenterCollaborator(github_1.context.payload.comment)) {
             console.log(`This command can only be executed by collaborators on this project. The current user is a ${helpers_1.getCommentAuthorAssoc(github_1.context.payload.comment)}`);
             return;
         }

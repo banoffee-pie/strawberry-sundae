@@ -87,14 +87,15 @@ export function getCommentAuthorAssoc(
 }
 
 // returns true if comment author is owner or collaborator or member
-export function isCommenterCollaborator(): boolean {
-  if (context.payload.comment === undefined)
+export function isCommenterCollaborator(
+  comment: {[key: string]: any; id: number} | undefined
+): boolean {
+  if (comment === undefined)
     throw new Error('context.payload.comment is undefined.');
-  return (
-    getCommentAuthorAssoc(context.payload.comment) ===
-      commentAuthorAssoc.COLLABORATOR ||
-    getCommentAuthorAssoc(context.payload.comment) ===
-      commentAuthorAssoc.MEMBER ||
-    getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.OWNER
-  );
+
+  return [
+    commentAuthorAssoc.COLLABORATOR,
+    commentAuthorAssoc.MEMBER,
+    commentAuthorAssoc.OWNER,
+  ].includes(getCommentAuthorAssoc(comment));
 }
