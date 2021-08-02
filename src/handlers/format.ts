@@ -22,9 +22,9 @@ class HandleFormat implements Handler {
       .map((dir: string) => `!${dir}`)
       .join('\n');
 
-    return await create(`${include}\n${exclude}`).then((g: Globber) =>
-      g.globGenerator()
-    );
+    return await create(
+      include + (exclude.length > 0) ? `\n${exclude}` : ''
+    ).then((g: Globber) => g.globGenerator());
   }
 
   private static async commitAndPush(): Promise<void> {

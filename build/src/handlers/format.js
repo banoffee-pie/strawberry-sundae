@@ -18,7 +18,7 @@ class HandleFormat {
         const exclude = inputs.exclude_dirs
             .map((dir) => `!${dir}`)
             .join('\n');
-        return await glob_1.create(`${include}\n${exclude}`).then((g) => g.globGenerator());
+        return await glob_1.create(include + (exclude.length > 0) ? `\n${exclude}` : '').then((g) => g.globGenerator());
     }
     static async commitAndPush() {
         console.log('Committing and pushing changes...');
