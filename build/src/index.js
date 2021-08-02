@@ -10,7 +10,7 @@ async function run() {
     // if just a normal comment -- no command
     if (command === '')
         return;
-    const handler = handlers_1.handlers.selectHandler(command);
+    const handler = handlers_1.Handlers.getInstance().selectHandler(command);
     if (handler === null) {
         console.log(`Command not recognised:\n${command}`);
         return;

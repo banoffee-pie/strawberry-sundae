@@ -2,8 +2,11 @@ export interface Handler {
   handle(command: string): void;
 }
 
-class Handlers {
+export class Handlers {
+  private static instance: Handlers;
   private readonly list: Map<string, Handler> = new Map<string, Handler>();
+
+  private constructor() {}
 
   public registerHandler(command: string, handler: Handler) {
     this.list.set(command, handler);
@@ -18,9 +21,12 @@ class Handlers {
     if (handler !== undefined) return handler;
     return null;
   }
-}
 
-export const handlers = new Handlers();
+  public static getInstance(): Handlers {
+    if (this.instance === undefined) return new Handlers();
+    return this.instance;
+  }
+}
 
 // Import all the handlers
 import './format';

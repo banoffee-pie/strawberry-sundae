@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 
-import {Handler, handlers} from './handlers/handlers';
+import {Handler, Handlers} from './handlers/handlers';
 import {checkoutBranch} from './git-commands';
 import {getCommand, getBranch} from './helpers';
 import {init} from './init';
@@ -11,7 +11,7 @@ async function run(): Promise<void> {
   // if just a normal comment -- no command
   if (command === '') return;
 
-  const handler: Handler | null = handlers.selectHandler(command);
+  const handler: Handler | null = Handlers.getInstance().selectHandler(command);
 
   if (handler === null) {
     console.log(`Command not recognised:\n${command}`);

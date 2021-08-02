@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handlers = void 0;
+exports.Handlers = void 0;
 class Handlers {
     constructor() {
         this.list = new Map();
@@ -15,8 +15,13 @@ class Handlers {
             return handler;
         return null;
     }
+    static getInstance() {
+        if (this.instance === undefined)
+            return new Handlers();
+        return this.instance;
+    }
 }
-exports.handlers = new Handlers();
+exports.Handlers = Handlers;
 // Import all the handlers
 require("./format");
 //# sourceMappingURL=handlers.js.map

@@ -1,11 +1,12 @@
 export interface Handler {
     handle(command: string): void;
 }
-declare class Handlers {
+export declare class Handlers {
+    private static instance;
     private readonly list;
+    private constructor();
     registerHandler(command: string, handler: Handler): void;
     selectHandler(command: string): Handler | null;
+    static getInstance(): Handlers;
 }
-export declare const handlers: Handlers;
 import './format';
-export {};

@@ -2,7 +2,7 @@ import {Globber, create} from '@actions/glob';
 import {exec} from '@actions/exec';
 const path = require('path');
 
-import {Handler, handlers} from './handlers';
+import {Handler, Handlers} from './handlers';
 import {clangExtensions, pythonExtensions} from '../constants';
 import * as inputs from '../inputs';
 import {haveFilesChanged, commit, push} from '../git-commands';
@@ -65,4 +65,4 @@ class HandleFormat implements Handler {
   }
 }
 
-handlers.registerHandler('format', new HandleFormat());
+Handlers.getInstance().registerHandler('format', new HandleFormat());

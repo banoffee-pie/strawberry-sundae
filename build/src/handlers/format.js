@@ -52,5 +52,5 @@ class HandleFormat {
         await HandleFormat.commitAndPush();
     }
 }
-handlers_1.handlers.registerHandler('format', new HandleFormat());
+handlers_1.Handlers.getInstance().registerHandler('format', new HandleFormat());
 //# sourceMappingURL=format.js.map
