@@ -48,7 +48,7 @@ class HandleFormat implements Handler {
   async handle(command: string) {
     if (!isCommenterCollaborator()) {
       console.log(
-        `This command can only be executed by collaborators on this project. The current user is ${getCommentAuthorAssoc(
+        `This command can only be executed by collaborators on this project. The current user is a ${getCommentAuthorAssoc(
           context.payload.comment
         )}`
       );

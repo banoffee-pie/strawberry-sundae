@@ -45,6 +45,6 @@ export function getCommentAuthorAssoc(
 export function isCommenterCollaborator(): boolean {
   if (context.payload.comment === undefined)
     throw new Error('context.payload.comment is undefined.');
-
+  console.log("COMMENTER: " + context.payload.comment.author_association + ".");
   return getCommentAuthorAssoc(context.payload.comment) === 'collaborator';
 }

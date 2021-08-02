@@ -44,7 +44,8 @@ exports.getCommentAuthorAssoc = getCommentAuthorAssoc;
 function isCommenterCollaborator() {
     if (github_1.context.payload.comment === undefined)
         throw new Error('context.payload.comment is undefined.');
-    return (getCommentAuthorAssoc(github_1.context.payload.comment) === 'collaborator');
+    console.log("COMMENTER: " + github_1.context.payload.comment.author_association + ".");
+    return getCommentAuthorAssoc(github_1.context.payload.comment) === 'collaborator';
 }
 exports.isCommenterCollaborator = isCommenterCollaborator;
 //# sourceMappingURL=helpers.js.map
