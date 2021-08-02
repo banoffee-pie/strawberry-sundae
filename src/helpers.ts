@@ -52,7 +52,7 @@ export function getCommentAuthorAssoc(
     throw new Error('context.payload.comment is undefined.');
 
   let assoc: commentAuthorAssoc;
-
+  console.log(comment.author_association);
   switch (comment.author_association) {
     case 'COLLABORATOR':
       assoc = commentAuthorAssoc.COLLABORATOR;

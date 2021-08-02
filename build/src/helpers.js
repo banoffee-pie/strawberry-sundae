@@ -51,6 +51,7 @@ function getCommentAuthorAssoc(comment) {
     if (comment === undefined)
         throw new Error('context.payload.comment is undefined.');
     let assoc;
+    console.log(comment.author_association);
     switch (comment.author_association) {
         case 'COLLABORATOR':
             assoc = commentAuthorAssoc.COLLABORATOR;
@@ -77,7 +78,7 @@ function getCommentAuthorAssoc(comment) {
             assoc = commentAuthorAssoc.NONE;
             break;
         default:
-            throw new Error("Unrecognised user association: " + comment.author_association);
+            throw new Error('Unrecognised user association: ' + comment.author_association);
     }
     return assoc;
 }
@@ -86,8 +87,10 @@ exports.getCommentAuthorAssoc = getCommentAuthorAssoc;
 function isCommenterCollaborator() {
     if (github_1.context.payload.comment === undefined)
         throw new Error('context.payload.comment is undefined.');
-    return (getCommentAuthorAssoc(github_1.context.payload.comment) === commentAuthorAssoc.COLLABORATOR ||
-        getCommentAuthorAssoc(github_1.context.payload.comment) === commentAuthorAssoc.MEMBER ||
+    return (getCommentAuthorAssoc(github_1.context.payload.comment) ===
+        commentAuthorAssoc.COLLABORATOR ||
+        getCommentAuthorAssoc(github_1.context.payload.comment) ===
+            commentAuthorAssoc.MEMBER ||
         getCommentAuthorAssoc(github_1.context.payload.comment) === commentAuthorAssoc.OWNER);
 }
 exports.isCommenterCollaborator = isCommenterCollaborator;
