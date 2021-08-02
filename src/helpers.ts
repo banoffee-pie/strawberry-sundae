@@ -32,3 +32,12 @@ export function getCommand(): string {
   if (comment[0] === '/') return comment.split(/[\n\r]/)[0];
   return '';
 }
+
+export function isCommenterCollaborator(): boolean {
+  if (context.payload.comment === undefined)
+    throw new Error('context.payload.comment is undefined.');
+
+  return (
+    context.payload.comment.author_association.toUpperCase() === 'COLLABORATOR'
+  );
+}

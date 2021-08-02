@@ -7,6 +7,7 @@ const handlers_1 = require("./handlers");
 const constants_1 = require("../constants");
 const inputs = require("../inputs");
 const git_commands_1 = require("../git-commands");
+const helpers_1 = require("../helpers");
 /*
  * Deals with /format command
  * */
@@ -36,6 +37,10 @@ class HandleFormat {
         }
     }
     async handle(command) {
+        if (!helpers_1.isCommenterCollaborator()) {
+            console.log('This command can only be executed by collaborators on this project.');
+            return;
+        }
         console.log(`Starting command: ${command}`);
         for await (const file of await HandleFormat.findFiles()) {
             const ext = path.extname(file).substring(1);

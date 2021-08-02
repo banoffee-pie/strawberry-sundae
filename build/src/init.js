@@ -5,6 +5,7 @@ exports.init = exports.hasBin = void 0;
 const exec_1 = require("@actions/exec");
 const constants_1 = require("./constants");
 const core = require("@actions/core");
+const github_1 = require("@actions/github");
 async function hasBin(name) {
     return exec_1.exec('which', [name]).then((exitCode) => {
         if (exitCode)
@@ -46,6 +47,8 @@ function installPipPackages() {
     });
 }
 async function init() {
+    if (github_1.context.payload.comment === undefined)
+        core.setFailed('Error when initialising: context.payload.comment is undefined.');
     await ensureDependenciesResolved();
     await installPipPackages();
 }

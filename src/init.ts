@@ -2,6 +2,7 @@
 import {exec} from '@actions/exec';
 import {requiredBinaries} from './constants';
 import * as core from '@actions/core';
+import {context} from '@actions/github';
 
 export async function hasBin(name: string): Promise<boolean> {
   return exec('which', [name]).then((exitCode: number) => {
@@ -49,6 +50,11 @@ function installPipPackages() {
 }
 
 export async function init(): Promise<void> {
+  if (context.payload.comment === undefined)
+    core.setFailed(
+      'Error when initialising: context.payload.comment is undefined.'
+    );
+
   await ensureDependenciesResolved();
   await installPipPackages();
 }

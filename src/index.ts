@@ -12,7 +12,6 @@ async function run(): Promise<void> {
   if (command === '') return;
 
   const handler: Handler | null = Handlers.getInstance().selectHandler(command);
-
   if (handler === null) {
     console.log(`Command not recognised:\n${command}`);
     return;

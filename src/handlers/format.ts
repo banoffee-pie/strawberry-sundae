@@ -6,6 +6,7 @@ import {Handler, Handlers} from './handlers';
 import {clangExtensions, pythonExtensions} from '../constants';
 import * as inputs from '../inputs';
 import {haveFilesChanged, commit, push} from '../git-commands';
+import {isCommenterCollaborator} from '../helpers';
 
 /*
  * Deals with /format command
@@ -44,6 +45,13 @@ class HandleFormat implements Handler {
   }
 
   async handle(command: string) {
+    if (!isCommenterCollaborator()) {
+      console.log(
+        'This command can only be executed by collaborators on this project.'
+      );
+      return;
+    }
+
     console.log(`Starting command: ${command}`);
 
     for await (const file of await HandleFormat.findFiles()) {
