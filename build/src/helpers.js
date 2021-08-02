@@ -37,14 +37,14 @@ function getCommand() {
 exports.getCommand = getCommand;
 var commentAuthorAssoc;
 (function (commentAuthorAssoc) {
-    commentAuthorAssoc[commentAuthorAssoc["COLLABORATOR"] = 0] = "COLLABORATOR";
-    commentAuthorAssoc[commentAuthorAssoc["CONTRIBUTOR"] = 1] = "CONTRIBUTOR";
-    commentAuthorAssoc[commentAuthorAssoc["FIRST_TIMER"] = 2] = "FIRST_TIMER";
-    commentAuthorAssoc[commentAuthorAssoc["FIRST_TIME_CONTRIBUTOR"] = 3] = "FIRST_TIME_CONTRIBUTOR";
-    commentAuthorAssoc[commentAuthorAssoc["MANNEQUIN"] = 4] = "MANNEQUIN";
-    commentAuthorAssoc[commentAuthorAssoc["MEMBER"] = 5] = "MEMBER";
-    commentAuthorAssoc[commentAuthorAssoc["NONE"] = 6] = "NONE";
-    commentAuthorAssoc[commentAuthorAssoc["OWNER"] = 7] = "OWNER";
+    commentAuthorAssoc["COLLABORATOR"] = "COLLABORATOR";
+    commentAuthorAssoc["CONTRIBUTOR"] = "CONTRIBUTOR";
+    commentAuthorAssoc["FIRST_TIMER"] = "FIRST_TIMER";
+    commentAuthorAssoc["FIRST_TIME_CONTRIBUTOR"] = "FIRST_TIME_CONTRIBUTOR";
+    commentAuthorAssoc["MANNEQUIN"] = "MANNEQUIN";
+    commentAuthorAssoc["MEMBER"] = "MEMBER";
+    commentAuthorAssoc["NONE"] = "NONE";
+    commentAuthorAssoc["OWNER"] = "OWNER";
 })(commentAuthorAssoc || (commentAuthorAssoc = {}));
 // https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
 function getCommentAuthorAssoc(comment) {

@@ -34,14 +34,14 @@ export function getCommand(): string {
 }
 
 enum commentAuthorAssoc {
-  COLLABORATOR,
-  CONTRIBUTOR,
-  FIRST_TIMER,
-  FIRST_TIME_CONTRIBUTOR,
-  MANNEQUIN,
-  MEMBER,
-  NONE,
-  OWNER
+  COLLABORATOR = 'COLLABORATOR',
+  CONTRIBUTOR = 'CONTRIBUTOR',
+  FIRST_TIMER = 'FIRST_TIMER',
+  FIRST_TIME_CONTRIBUTOR = 'FIRST_TIME_CONTRIBUTOR',
+  MANNEQUIN = 'MANNEQUIN',
+  MEMBER = 'MEMBER',
+  NONE = 'NONE',
+  OWNER = 'OWNER',
 }
 
 // https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
@@ -79,7 +79,9 @@ export function getCommentAuthorAssoc(
       assoc = commentAuthorAssoc.NONE;
       break;
     default:
-      throw new Error("Unrecognised user association: " + comment.author_association);
+      throw new Error(
+        'Unrecognised user association: ' + comment.author_association
+      );
   }
   return assoc;
 }
@@ -89,8 +91,10 @@ export function isCommenterCollaborator(): boolean {
   if (context.payload.comment === undefined)
     throw new Error('context.payload.comment is undefined.');
   return (
-    getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.COLLABORATOR ||
-    getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.MEMBER ||
+    getCommentAuthorAssoc(context.payload.comment) ===
+      commentAuthorAssoc.COLLABORATOR ||
+    getCommentAuthorAssoc(context.payload.comment) ===
+      commentAuthorAssoc.MEMBER ||
     getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.OWNER
   );
 }
