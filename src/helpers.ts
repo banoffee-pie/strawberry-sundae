@@ -33,11 +33,18 @@ export function getCommand(): string {
   return '';
 }
 
+export function getCommentAuthorAssoc(
+  comment: {[key: string]: any; id: number} | undefined
+) {
+  if (comment === undefined)
+    throw new Error('context.payload.comment is undefined.');
+
+  return comment.author_association.toLowerCase();
+}
+
 export function isCommenterCollaborator(): boolean {
   if (context.payload.comment === undefined)
     throw new Error('context.payload.comment is undefined.');
 
-  return (
-    context.payload.comment.author_association.toUpperCase() === 'COLLABORATOR'
-  );
+  return getCommentAuthorAssoc(context.payload.comment) === 'collaborator';
 }

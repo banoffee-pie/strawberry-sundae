@@ -6,7 +6,8 @@ import {Handler, Handlers} from './handlers';
 import {clangExtensions, pythonExtensions} from '../constants';
 import * as inputs from '../inputs';
 import {haveFilesChanged, commit, push} from '../git-commands';
-import {isCommenterCollaborator} from '../helpers';
+import {getCommentAuthorAssoc, isCommenterCollaborator} from '../helpers';
+import {context} from '@actions/github';
 
 /*
  * Deals with /format command
@@ -47,7 +48,9 @@ class HandleFormat implements Handler {
   async handle(command: string) {
     if (!isCommenterCollaborator()) {
       console.log(
-        'This command can only be executed by collaborators on this project.'
+        `This command can only be executed by collaborators on this project. The current user is ${getCommentAuthorAssoc(
+          context.payload.comment
+        )}`
       );
       return;
     }

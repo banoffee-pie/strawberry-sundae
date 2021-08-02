@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isCommenterCollaborator = exports.getCommand = exports.getBranch = exports.octokit = void 0;
+exports.isCommenterCollaborator = exports.getCommentAuthorAssoc = exports.getCommand = exports.getBranch = exports.octokit = void 0;
 // Gets the branch that the PR is merging from
 const github_1 = require("@actions/github");
 const core = require("@actions/core");
@@ -35,10 +35,16 @@ function getCommand() {
     return '';
 }
 exports.getCommand = getCommand;
+function getCommentAuthorAssoc(comment) {
+    if (comment === undefined)
+        throw new Error('context.payload.comment is undefined.');
+    return comment.author_association.toLowerCase();
+}
+exports.getCommentAuthorAssoc = getCommentAuthorAssoc;
 function isCommenterCollaborator() {
     if (github_1.context.payload.comment === undefined)
         throw new Error('context.payload.comment is undefined.');
-    return (github_1.context.payload.comment.author_association.toUpperCase() === 'COLLABORATOR');
+    return (getCommentAuthorAssoc(github_1.context.payload.comment) === 'collaborator');
 }
 exports.isCommenterCollaborator = isCommenterCollaborator;
 //# sourceMappingURL=helpers.js.map

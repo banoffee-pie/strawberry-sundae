@@ -38,7 +38,7 @@ class HandleFormat {
     }
     async handle(command) {
         if (!helpers_1.isCommenterCollaborator()) {
-            console.log('This command can only be executed by collaborators on this project.');
+            console.log(`This command can only be executed by collaborators on this project. The current user `);
             return;
         }
         console.log(`Starting command: ${command}`);
