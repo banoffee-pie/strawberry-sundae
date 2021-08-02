@@ -5,11 +5,12 @@ exports.clangExtensions = [
     'c',
     'h',
     'cpp',
+    'hpp',
     'java',
     'json',
     'js',
 ];
-exports.pythonExtensions = ['py', 'py'];
+exports.pythonExtensions = ['py', 'py3'];
 exports.requiredBinaries = [
     'python',
     'pip',
