@@ -33,18 +33,64 @@ export function getCommand(): string {
   return '';
 }
 
+enum commentAuthorAssoc {
+  COLLABORATOR,
+  CONTRIBUTOR,
+  FIRST_TIMER,
+  FIRST_TIME_CONTRIBUTOR,
+  MANNEQUIN,
+  MEMBER,
+  NONE,
+  OWNER
+}
+
+// https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
 export function getCommentAuthorAssoc(
   comment: {[key: string]: any; id: number} | undefined
-) {
+): commentAuthorAssoc {
   if (comment === undefined)
     throw new Error('context.payload.comment is undefined.');
 
-  return comment.author_association.toLowerCase();
+  let assoc: commentAuthorAssoc;
+
+  switch (comment.author_association) {
+    case 'COLLABORATOR':
+      assoc = commentAuthorAssoc.COLLABORATOR;
+      break;
+    case 'CONTRIBUTOR':
+      assoc = commentAuthorAssoc.CONTRIBUTOR;
+      break;
+    case 'FIRST_TIMER':
+      assoc = commentAuthorAssoc.FIRST_TIMER;
+      break;
+    case 'FIRST_TIME_CONTRIBUTOR':
+      assoc = commentAuthorAssoc.FIRST_TIME_CONTRIBUTOR;
+      break;
+    case 'MANNEQUIN':
+      assoc = commentAuthorAssoc.MANNEQUIN;
+      break;
+    case 'MEMBER':
+      assoc = commentAuthorAssoc.MEMBER;
+      break;
+    case 'NONE':
+      assoc = commentAuthorAssoc.NONE;
+      break;
+    case 'OWNER':
+      assoc = commentAuthorAssoc.NONE;
+      break;
+    default:
+      throw new Error("Unrecognised user association: " + comment.author_association);
+  }
+  return assoc;
 }
 
+// returns true if comment author is owner or collaborator or member
 export function isCommenterCollaborator(): boolean {
   if (context.payload.comment === undefined)
     throw new Error('context.payload.comment is undefined.');
-  console.log("COMMENTER: " + context.payload.comment.author_association + ".");
-  return getCommentAuthorAssoc(context.payload.comment) === 'collaborator';
+  return (
+    getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.COLLABORATOR ||
+    getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.MEMBER ||
+    getCommentAuthorAssoc(context.payload.comment) === commentAuthorAssoc.OWNER
+  );
 }
