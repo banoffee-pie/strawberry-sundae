@@ -23,7 +23,7 @@ export class Handlers {
   }
 
   public static getInstance(): Handlers {
-    if (this.instance === undefined) return new Handlers();
+    if (this.instance === undefined) this.instance = new Handlers();
     return this.instance;
   }
 }

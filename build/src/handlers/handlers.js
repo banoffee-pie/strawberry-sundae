@@ -17,7 +17,7 @@ class Handlers {
     }
     static getInstance() {
         if (this.instance === undefined)
-            return new Handlers();
+            this.instance = new Handlers();
         return this.instance;
     }
 }
