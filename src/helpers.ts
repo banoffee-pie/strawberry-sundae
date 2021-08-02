@@ -76,7 +76,7 @@ export function getCommentAuthorAssoc(
       assoc = commentAuthorAssoc.NONE;
       break;
     case 'OWNER':
-      assoc = commentAuthorAssoc.NONE;
+      assoc = commentAuthorAssoc.OWNER;
       break;
     default:
       throw new Error(

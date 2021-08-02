@@ -75,7 +75,7 @@ function getCommentAuthorAssoc(comment) {
             assoc = commentAuthorAssoc.NONE;
             break;
         case 'OWNER':
-            assoc = commentAuthorAssoc.NONE;
+            assoc = commentAuthorAssoc.OWNER;
             break;
         default:
             throw new Error('Unrecognised user association: ' + comment.author_association);
