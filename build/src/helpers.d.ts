@@ -17,8 +17,5 @@ export declare function getCommentAuthorAssoc(comment: {
     [key: string]: any;
     id: number;
 } | undefined): commentAuthorAssoc;
-export declare function isCommenterCollaborator(comment: {
-    [key: string]: any;
-    id: number;
-} | undefined): boolean;
+export declare function isCommenterCollaborator(): boolean;
 export {};

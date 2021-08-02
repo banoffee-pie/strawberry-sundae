@@ -87,15 +87,18 @@ export function getCommentAuthorAssoc(
 }
 
 // returns true if comment author is owner or collaborator or member
-export function isCommenterCollaborator(
-  comment: {[key: string]: any; id: number} | undefined
-): boolean {
+export function isCommenterCollaborator(): boolean {
+  const {comment} = context.payload;
+
   if (comment === undefined)
     throw new Error('context.payload.comment is undefined.');
+
+  const assoc = getCommentAuthorAssoc(comment);
+  console.info(`The commenter association is ${assoc}`);
 
   return [
     commentAuthorAssoc.COLLABORATOR,
     commentAuthorAssoc.MEMBER,
     commentAuthorAssoc.OWNER,
-  ].includes(getCommentAuthorAssoc(comment));
+  ].includes(assoc);
 }

@@ -84,14 +84,17 @@ function getCommentAuthorAssoc(comment) {
 }
 exports.getCommentAuthorAssoc = getCommentAuthorAssoc;
 // returns true if comment author is owner or collaborator or member
-function isCommenterCollaborator(comment) {
+function isCommenterCollaborator() {
+    const { comment } = github_1.context.payload;
     if (comment === undefined)
         throw new Error('context.payload.comment is undefined.');
+    const assoc = getCommentAuthorAssoc(comment);
+    console.info(`The commenter association is ${assoc}`);
     return [
         commentAuthorAssoc.COLLABORATOR,
         commentAuthorAssoc.MEMBER,
         commentAuthorAssoc.OWNER,
-    ].includes(getCommentAuthorAssoc(comment));
+    ].includes(assoc);
 }
 exports.isCommenterCollaborator = isCommenterCollaborator;
 //# sourceMappingURL=helpers.js.map
