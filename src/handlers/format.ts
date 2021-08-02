@@ -18,12 +18,18 @@ class HandleFormat implements Handler {
       .map((ext: string) => `**/*.${ext}`)
       .join('\n');
 
-    const exclude: string = inputs.exclude_dirs
+    const excludeDir: string = inputs.exclude_dirs
       .map((dir: string) => `!${dir}`)
       .join('\n');
 
+    const excludeFile: string = inputs.exclude_files
+      .map((file: string) => `!${file}`)
+      .join('\n');
+
     return await create(
-      include + (exclude.length > 0 ? `\n${exclude}` : '')
+      include +
+        (excludeDir.length > 0 ? `\n${excludeDir}` : '') +
+        (excludeFile.length > 0 ? `\n${excludeFile}` : '')
     ).then((g: Globber) => g.globGenerator());
   }
 

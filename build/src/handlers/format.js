@@ -15,10 +15,15 @@ class HandleFormat {
         const include = inputs.fileExtensions
             .map((ext) => `**/*.${ext}`)
             .join('\n');
-        const exclude = inputs.exclude_dirs
+        const excludeDir = inputs.exclude_dirs
             .map((dir) => `!${dir}`)
             .join('\n');
-        return await glob_1.create(include + (exclude.length > 0 ? `\n${exclude}` : '')).then((g) => g.globGenerator());
+        const excludeFile = inputs.exclude_files
+            .map((file) => `!${file}`)
+            .join('\n');
+        return await glob_1.create(include +
+            (excludeDir.length > 0 ? `\n${excludeDir}` : '') +
+            (excludeFile.length > 0 ? `\n${excludeFile}` : '')).then((g) => g.globGenerator());
     }
     static async commitAndPush() {
         console.log('Committing and pushing changes...');

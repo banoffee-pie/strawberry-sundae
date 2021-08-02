@@ -5,8 +5,9 @@ Currently only supports `/format`, but more can be added by registering a handle
 
 ## Inputs
 ### Format
-* **file-extensions:** The file extensions of files you want to pass through the auto-formatter
-* **exclude-dirs:** Directories to exclude from the search for files to format
+* **file-extensions:** The file extensions of files you want to pass through the auto-formatter. Space-delimited string.
+* **exclude-dirs:** Directories to exclude from the search for files to format. Space-delimited string.
+* **exclude-files:** Files to exclude from being auto-formatted. Space-delimited string.
 * **c-style:** The style guide for c-style languages formatted with clang-format (C, C#, C++, Java, Javascript, etc.)
 * **python-style:** The python style guide. Accepts either `black` or one of the options for the `yapf` formatter.
 * **token:** The GitHub token to access pass to OctoKit.
@@ -29,7 +30,8 @@ jobs:
         with:
           file-extensions:  |
             c h cpp py
-          exclude-dirs: ./idea
+          exclude-dirs: "./submodules"
+          exclude-files: "./src/dont-format.c"
           c-style: google
           python-style: pep8
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -13,7 +13,11 @@ inputs:
     default: pep8
     required: false
   exclude-dirs:
-    description: "Directories you want to exclude from being auto-formatted, relative to document root"
+    description: "Directories you want to exclude from being auto-formatted, relative to repository root"
+    required: false
+    default: ""
+  exclude-files:
+    description: "Files you want to exclude from being auto-formatted, relative to repository root"
     required: false
     default: ""
   token:
