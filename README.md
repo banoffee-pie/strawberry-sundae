@@ -1,4 +1,4 @@
-# Solid-Barnacle
+# Strawberry - Sundae
 Add commands to pull request comments.
 
 Currently only supports `/format`, but more can be added by registering a handler and parsing arguments to the function.
